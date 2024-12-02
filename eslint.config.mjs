@@ -37,6 +37,10 @@ export default tseslint.config(
   },
   {
     files: ['**/*.tsx', '**/*.ts'],
+    rules: {
+      'unicorn/prevent-abbreviations': 'off',
+      'unicorn/no-array-reduce': 'off',
+    },
   },
   eslintConfigPrettier,
 );

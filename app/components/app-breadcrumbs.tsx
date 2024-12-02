@@ -9,7 +9,7 @@ import {
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
 import { useRouteSegments } from '@/hooks/use-route-segments';
-import { toTitleCase } from '@/lib/utils';
+import { toTitleCase } from '@/lib/utils/string';
 import React from 'react';
 import { NavLink } from 'react-router';
 

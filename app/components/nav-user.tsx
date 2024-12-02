@@ -16,7 +16,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/sidebar';
-import { extractInitials } from '@/lib/utils';
+import { extractInitials } from '@/lib/utils/string';
 import { ChevronsUpDown, Cog, LogOut } from 'lucide-react';
 import { NavLink } from 'react-router';
 
