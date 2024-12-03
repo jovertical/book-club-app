@@ -27,7 +27,7 @@ const send = async <T>(path: string, options: RequestInit) => {
 
   return {
     ok: true,
-    data: ('data' in json ? json.data : json) as T,
+    data: json as T,
   };
 };
 

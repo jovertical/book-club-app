@@ -1,4 +1,5 @@
 import { RowActions } from './row-actions';
+import { Badge } from '@/components/ui/badge';
 import { toTitleCase } from '@/lib/utils/string';
 import { Book } from '@/schema/book.schema';
 import { ColumnDef } from '@tanstack/react-table';
@@ -11,14 +12,34 @@ export const columns: ColumnDef<Book>[] = [
     cell: ({ row }) => toTitleCase(row.getValue('title')) ?? '---',
     enableSorting: true,
     enableHiding: false,
-    size: 200,
+    size: 300,
   },
   {
-    accessorKey: 'info',
-    header: 'Info',
+    id: 'author',
+    header: 'Author',
+    cell: ({ row }) => toTitleCase(row.original.author?.name ?? '') ?? '---',
     enableSorting: false,
     enableHiding: false,
-    size: 350,
+  },
+  {
+    id: 'genres',
+    header: 'Genres',
+    cell: ({ row }) => (
+      <div className="flex justify-start gap-1.5 flex-wrap">
+        {row.original.genres?.map((genre, genreIdx) => (
+          <Badge
+            key={genreIdx}
+            variant="outline"
+            className="px-2 h-7"
+          >
+            {genre.name}
+          </Badge>
+        ))}
+      </div>
+    ),
+    size: 300,
+    enableSorting: false,
+    enableHiding: false,
   },
   {
     accessorKey: 'createdAt',

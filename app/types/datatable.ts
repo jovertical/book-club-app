@@ -2,6 +2,7 @@ export interface DatatableFetchResult<TData> {
   data: TData[];
   meta: {
     total: number;
+    next?: number;
   };
 }
 

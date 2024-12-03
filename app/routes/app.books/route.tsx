@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import * as api from '@/lib/api';
 import { Book } from '@/schema/book.schema';
-import { DatatableFetchFn } from '@/types/datatable';
+import { DatatableFetchFn, DatatableFetchResult } from '@/types/datatable';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Plus } from 'lucide-react';
 import { Link } from 'react-router';
@@ -17,14 +17,15 @@ export function meta() {
 }
 
 const getBooks: DatatableFetchFn<Book> = async (options) => {
-  const response = await api.get<Book[]>('/books', {
+  const response = await api.get<DatatableFetchResult<Book>>('/books', {
     cursor: options.cursor.toString(),
     size: options.size.toString(),
     ...(options.sort_by && { sort_by: options.sort_by }),
     ...(options.sort_order && { sort_order: options.sort_order }),
   });
 
-  return response;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return response.data as any; // TODO: fix typing here...
 };
 
 export default function BooksIndex() {
@@ -54,7 +55,6 @@ export default function BooksIndex() {
         <DataTable
           columns={columns}
           rowKey="id"
-          estimatedRowHeight={56}
           fetchKey="users"
           fetchSize={15}
           fetchFnAction={getBooks}
